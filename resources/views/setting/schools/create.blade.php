@@ -36,13 +36,13 @@
             </div>
             <div class="row row-sm pd-x-20 pd-b-5">
               <div class="form-group col-sm-6">
-                <label for="key_school">Clave de escuela <small><span class="tx-danger tx-bold">*</span></small></label>
-                <input class="form-control @error('key_school') is-invalid @enderror"
+                <label for="key">Clave de escuela <small><span class="tx-danger tx-bold">*</span></small></label>
+                <input class="form-control @error('key') is-invalid @enderror"
                        data-parsley-trigger="change" data-parsley-valid-key-school
-                       id="key_school" name="key_school"
+                       id="key" name="key"
                        type="text" style="text-transform: uppercase"
-                       value="{{old('key_school')}}"
-                       autocomplete="key_school"
+                       value="{{old('key')}}"
+                       autocomplete="key"
                        autofocus maxlength="10"  required>
               </div>
             </div>
