@@ -8,10 +8,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class School extends Model
 {
     use SoftDeletes;
-    /**
-     * The attributes that aren't mass assignable.
-     *
-     * @var array
-     */
-    protected $guarded = [];
+
+    protected $table    = 'schools';
+    protected $guarded  = [];
+    protected $dates    = ['deleted_at', 'created_at', 'updated_at'];
+    protected $casts    = ['status' => 'boolean'];
+
+    /*Mutators*/
+
+    public function setKey($value)
+    {
+        $this->attributes['key'] = mb_strtoupper($value);
+    }
 }

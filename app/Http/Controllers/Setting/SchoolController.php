@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Setting;
 
 use App\Http\Controllers\Controller;
+use App\Models\SchoolType;
 use App\Models\Setting\School;
 use Illuminate\Http\Request;
 
@@ -31,8 +32,9 @@ class SchoolController extends Controller
      */
     public function create()
     {
+        $types = SchoolType::all();
         return response()
-            ->view('setting.schools.create',[],200);
+            ->view('setting.schools.create',['types' => $types],200);
     }
 
     /**

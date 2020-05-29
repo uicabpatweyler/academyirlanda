@@ -43,7 +43,37 @@
                        type="text" style="text-transform: uppercase"
                        value="{{old('key')}}"
                        autocomplete="key"
-                       autofocus maxlength="10"  required>
+                       autofocus maxlength="10" required>
+              </div>
+              <div class="form-group col-sm-6 d-flex flex-column align-items-start">
+                <label for="incorporation">Núm. de Incorporación</label>
+                <input class="form-control @error('incorporation') is-invalid @enderror"
+                       data-parsley-trigger="change"
+                       id="incorporation" name="incorporation"
+                       type="text" style="text-transform: uppercase"
+                       value="{{old('incorporation')}}"
+                       autocomplete="incorporation"
+                       autofocus maxlength="11">
+              </div>
+              <div class="form-group col-sm-12 d-flex flex-column align-items-start">
+                <label for="name">Nombre de la Escuela <small><span class="tx-danger tx-bold">*</span></small></label>
+                <input class="form-control @error('name') is-invalid @enderror"
+                       data-parsley-trigger="change"
+                       id="name" name="name"
+                       type="text" style="text-transform: capitalize"
+                       value="{{old('name')}}"
+                       autocomplete="name"
+                       autofocus  minlength="3" required>
+              </div>
+              <div class="form-group col-sm-4 d-flex flex-column align-items-start">
+                <label for="school_type_id">Tipo de Escuela <small><span class="tx-danger tx-bold">*</span></small></label>
+                <select class="custom-select @error('school_type_id') is-invalid @enderror"
+                        id="school_type_id" name="school_type_id" required>
+                  <option selected value=""></option>
+                  @foreach($types as $type)
+                    <option value="{{$type->id}}">{{$type->name}}</option>
+                  @endforeach
+                </select>
               </div>
             </div>
             <div class="bd-t bd-1 py-2 pd-x-20 mt-4 d-flex justify-content-end">
