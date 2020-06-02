@@ -6,3 +6,7 @@ Route::catch(function () {
 });
 
 Route::resource('schools', 'SchoolController');
+Route::get('school_level/{schoolType}','SchoolController@schoolLevel')
+    ->name('schoolLevel');
+Route::get('school_service/{schoolService}','SchoolController@schoolService')
+    ->name('schoolService');

@@ -66,7 +66,7 @@
                        autofocus  minlength="3" required>
               </div>
               <div class="form-group col-sm-4 d-flex flex-column align-items-start">
-                <label for="school_type_id">Tipo de Escuela <small><span class="tx-danger tx-bold">*</span></small></label>
+                <label for="school_type_id">Tipo <small><span class="tx-danger tx-bold">*</span></small></label>
                 <select class="custom-select @error('school_type_id') is-invalid @enderror"
                         id="school_type_id" name="school_type_id" required>
                   <option selected value=""></option>
@@ -74,6 +74,58 @@
                     <option value="{{$type->id}}">{{$type->name}}</option>
                   @endforeach
                 </select>
+              </div>
+              <div class="form-group col-sm-4 d-flex flex-column align-items-start">
+                <label for="school_level_id">Nivel <small><span class="tx-danger tx-bold">*</span></small></label>
+                <select class="custom-select @error('school_level_id') is-invalid @enderror"
+                        id="school_level_id" name="school_level_id" required disabled>
+                  <option selected value=""></option>
+                </select>
+              </div>
+              <div class="form-group col-sm-4 d-flex flex-column align-items-start">
+                <label for="school_service_id">Servicio <small><span class="tx-danger tx-bold">*</span></small></label>
+                <select class="custom-select @error('school_service_id') is-invalid @enderror"
+                        id="school_service_id" name="school_service_id" required disabled>
+                  <option selected value=""></option>
+                </select>
+              </div>
+              <div class="form-group col-sm-4 d-flex flex-column align-items-start">
+                <label for="work_shift">Turno <small><span class="tx-danger tx-bold">*</span></small></label>
+                <select class="custom-select @error('work_shift') is-invalid @enderror"
+                        id="work_shift" name="work_shift" required>
+                  <option selected value=""></option>
+                  <option value="No Aplica">No Aplica</option>
+                  <option value="Matutino">Matutino</option>
+                  <option value="Vespertino">Vespertino</option>
+                  <option value="Nocturno">Nocturno</option>
+                  <option value="Discontinuo">Discontinuo</option>
+                  <option value="Continuo">Continuo</option>
+                </select>
+              </div>
+              <div class="form-group col-sm-4 d-flex flex-column align-items-start">
+                <label for="economic_support">Sostenimiento <small><span class="tx-danger tx-bold">*</span></small></label>
+                <select class="custom-select @error('economic_support') is-invalid @enderror"
+                        id="economic_support" name="economic_support" required>
+                  <option selected value=""></option>
+                  <option value="Público">Público</option>
+                  <option value="Privado">Privado</option>
+                </select>
+              </div>
+            </div>
+            <div class="row row-sm pd-x-20 pd-b-5">
+              <div class="form-group col-sm-4 d-flex flex-column align-items-start">
+                <label for="email">E-mail</label>
+                <input class="form-control @error('email') is-invalid @enderror"
+                       id="email" name="email"
+                       type="email"
+                       value="{{old('email')}}">
+              </div>
+              <div class="form-group col-sm-4 d-flex flex-column align-items-start">
+                <label for="office_phone">Teléfono</label>
+                <input class="form-control @error('office_phone') is-invalid @enderror"
+                       id="office_phone" name="office_phone"
+                       type="text"
+                       value="{{old('office_phone')}}">
               </div>
             </div>
             <div class="bd-t bd-1 py-2 pd-x-20 mt-4 d-flex justify-content-end">
@@ -131,6 +183,57 @@
       $("#btn_submit").prop('disabled', 'disabled');
       submitForm("POST","{{ route('users.store') }}", $("#formCreate").serialize());
     });
+
+    $("#school_type_id").change( function (){
+      if($(this).val()!==''){
+        
+        $("#school_level_id").enableControl(true,true);
+        $("#school_service_id").enableControl(true,false);
+        
+        $.getJSON('{{Request::root()}}'+'/setting/school_level/'+$(this).val(), null, function (values) {
+          $('#school_level_id').populateSelect(values);
+        });
+        
+      }
+      else{
+        $("#school_level_id").enableControl(true,false);
+        $("#school_service_id").enableControl(true,false);
+      }
+    });
+    
+    $("#school_level_id").change( function () {
+      if($(this).val()!==''){
+
+        $("#school_service_id").enableControl(true,true);
+
+        $.getJSON('{{Request::root()}}'+'/setting/school_service/'+$(this).val(), null, function (values) {
+            $('#school_service_id').populateSelect(values);
+        });
+        
+      }
+      else{
+        $("#school_service_id").enableControl(true,false);
+      }
+    })
+    
+    $.fn.enableControl = function(empty, state){
+      if(empty){ $(this).empty(); }
+      if(state){
+        $(this).removeAttr('disabled');
+      }
+      else{
+        $(this).prop('disabled','disabled');
+      }
+    };
+
+    $.fn.populateSelect = function (values) {
+      var options = '';
+      $.each(values, function (key, row) {
+          options += '<option value="' + row.value + '">' + row.text + '</option>';
+      });
+      $(this).html(options);
+    };
+    
   });
 </script>
 @endpush
