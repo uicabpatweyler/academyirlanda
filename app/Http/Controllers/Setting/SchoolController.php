@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Setting;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreSchool;
 use App\Models\SchoolLevel;
 use App\Models\SchoolService;
 use App\Models\SchoolType;
@@ -29,9 +30,14 @@ class SchoolController extends Controller
             ->view('setting.schools.create',['types' => $types],200);
     }
 
-    public function store(Request $request)
+    public function store(StoreSchool $request)
     {
-        //
+        $request->createSchool();
+        return response()
+            ->json([
+                'message' => 'La escuela se ha creado correctamente',
+                'url' => route('schools.index')
+            ]);
     }
 
     public function show(School $school)

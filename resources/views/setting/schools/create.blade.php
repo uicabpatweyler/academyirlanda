@@ -181,8 +181,28 @@
       return false;
     }).on('form:success', function(){
       $("#btn_submit").prop('disabled', 'disabled');
-      submitForm("POST","{{ route('users.store') }}", $("#formCreate").serialize());
+      submitForm("POST","{{ route('schools.store') }}", $("#formCreate").serialize());
     });
+
+    function submitForm(_method, _url, _data){
+        $.ajax({
+            method: _method,
+            url: _url,
+            data: _data
+        }).done( function(data, textStatus, jqXHR) {
+            showSuccessForm(data.message, data.url);
+        }).fail( function (jqXHR, textStatus, errorThrown) {
+            $("#btn_submit").removeAttr('disabled');
+            $.each(jqXHR.responseJSON.errors, function(key,value){
+              $("#"+key).parsley().addError('errorServer', {message: value, updateClass: true});
+            });
+            let errors = Object.keys(jqXHR.responseJSON.errors).length;
+            let message = errors === 1
+                ? 'Verifica el campo marcado en rojo'
+                : 'Verifica los ' +  errors + ' campos marcados en rojo';
+            showErrorsForm(message);
+        });
+    }
 
     $("#school_type_id").change( function (){
       if($(this).val()!==''){
