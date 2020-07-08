@@ -23,4 +23,63 @@
       </div>
     @endcan
   </div>
+
+  <div class="row row-xs">
+    <div class="col-lg-12 col-xl-12 mg-t-0">
+      <div class="card card-accent-green-700 shadow-sm">
+        <div class="card-body">
+          @if($schools->isNotEmpty())
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th scope="col" class="tx-white" style="background-color: #3367D6">CCT</th>
+                  <th scope="col" class="tx-white" style="background-color: #3367D6">Escuela</th>
+                  <th scope="col" class="tx-white" style="background-color: #3367D6">Nivel</th>
+                  <th scope="col" class="tx-white" style="background-color: #3367D6">Turno</th>
+                  <th scope="col" class="tx-white tx-center" style="background-color: #3367D6">Estado</th>
+                  <th scope="col" class="tx-white text-center" style="background-color: #3367D6">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($schools as $school)
+                  <tr>
+                    <td class="tx-12 tx-semibold tx-sans" style="">
+                      {{$school->key}}
+                    </td>
+                    <td class="tx-12 tx-sans" style="text-transform: capitalize">
+                      {{$school->name}}
+                    </td>
+                    <td class="tx-12 tx-sans" style="">
+                      {{$school->level->name}}
+                    </td>
+                    <td class="tx-12 tx-sans" style="">
+                      {{$school->work_shift}}
+                    </td>
+                    <td class="tx-center" style="">
+                      <i class="fas fa-check text-success"></i>
+                    </td>
+                    <td class="tx-center" style="">
+                      @can('update', $school)
+                        <a class="btn btn-success btn-xs pd-r-4 pd-l-4" href="{{route('schools.edit',$school)}}" role="button">
+                          <i data-feather="edit-3" class=""></i> Editar
+                        </a>
+                      @endcan
+                      @can('delete', $school)
+                        <button type="button" data-url="" class="btn btn-danger btn-xs pd-r-4 pd-l-4" id="btn_delete" name="{{$school->id}}">
+                          <i data-feather="trash-2" class=""></i> Borrar
+                        </button>
+                      @endcan
+                    </td>
+                  </tr>
+                @endforeach
+                </tbody>
+              </table>
+            </div>
+          @else
+          @endif
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection

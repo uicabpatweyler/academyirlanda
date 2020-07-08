@@ -30,7 +30,7 @@ class SchoolPolicy
      */
     public function view(User $user, School $school)
     {
-        //
+        return $user->hasPermissionTo('schools.view') || $user->hasPermissionTo('*.*');
     }
 
     /**
@@ -53,7 +53,7 @@ class SchoolPolicy
      */
     public function update(User $user, School $school)
     {
-        //
+        return $user->hasPermissionTo('schools.update') || $user->hasPermissionTo('*.*');
     }
 
     /**
@@ -65,7 +65,7 @@ class SchoolPolicy
      */
     public function delete(User $user, School $school)
     {
-        //
+        return $user->hasPermissionTo('schools.soft_delete') || $user->hasPermissionTo('*.*');
     }
 
     /**

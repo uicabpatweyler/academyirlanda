@@ -150,6 +150,11 @@
 
 <script>
   $().ready( function () {
+
+    $("#btn_cancel").click(function () {
+      showWarningCancel("{{route('schools.index')}}");
+    });
+    
     window.Parsley.addValidator('validKeySchool',{
       validateString: function(value){
         return /^[0-9]{2,}[A-Za-z]{3,}[0-9]{4,}[A-Za-z]{1,}$/.test(value);

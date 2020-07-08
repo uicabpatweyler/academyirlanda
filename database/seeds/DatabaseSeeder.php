@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesHasPermissionsTableSeeder::class);
         $this->call(ModulesTableSeeder::class);
         $this->call(OptionsTableSeeder::class);
+        $this->call(SchoolTypesTableSeeder::class);
+        $this->call(SchoolLevelsTableSeeder::class);
+        $this->call(SchoolServicesTableSeeder::class);
 
         //$roleAdmin = Role::findByName('administrador');
         //$roleManager = Role::findByName('supervisor');

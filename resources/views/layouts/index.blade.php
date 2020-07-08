@@ -165,16 +165,21 @@
           </li>
         @endif
         <li class="nav-label"></li>
-        <li class="nav-item with-sub {{ Str::contains(url()->current(), ['setting']) ? 'active show' : '' }}">
-          <a href="" class="nav-link">
-            <i data-feather="settings"></i> <span>Configuración</span>
-          </a>
-          <ul>
-            <li class="{{ Str::contains(url()->current(), ['schools']) ? 'active' : '' }}">
-              <a href="{{route('schools.index')}}">Escuelas</a>
-            </li>
-          </ul>
-        </li>
+        @if(Auth::user()->can('*.*') || Auth::user()->can('access.setting.module'))
+          <li class="nav-item with-sub {{ Str::contains(url()->current(), ['setting']) ? 'active show' : '' }}">
+            <a href="" class="nav-link">
+              <i data-feather="settings"></i> <span>Configuración</span>
+            </a>
+            <ul>
+              @if(Auth::user()->can('*.*') || Auth::user()->can('schools'))
+              <li class="{{ Str::contains(url()->current(), ['schools']) ? 'active' : '' }}">
+                <a href="{{route('schools.index')}}">Escuelas</a>
+              </li>
+              @endif
+            </ul>
+          </li>
+        @endif
+        
       </ul><!-- End Sidebar Menu End -->
       
     </div><!-- end aside-body -->

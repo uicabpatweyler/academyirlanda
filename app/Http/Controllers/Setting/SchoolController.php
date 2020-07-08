@@ -19,8 +19,9 @@ class SchoolController extends Controller
 
     public function index()
     {
+        $schools = School::status(true)->get();
         return response()
-            ->view('setting.schools.index',[],200);
+            ->view('setting.schools.index',['schools' => $schools],200);
     }
 
     public function create()
@@ -47,7 +48,13 @@ class SchoolController extends Controller
 
     public function edit(School $school)
     {
-        //
+        return response()
+            ->view('setting.schools.edit',[
+                'school' => $school,
+                'types'  => SchoolType::all(),
+                'levels' => SchoolType::find($school->school_type_id)->levels,
+                'services' => SchoolLevel::find($school->school_level_id)->services
+            ],200);
     }
 
     public function update(Request $request, School $school)

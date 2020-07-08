@@ -15,11 +15,13 @@
       <h4 class="mg-b-0 tx-spacing--1">Usuarios</h4>
     </div>
     {{-- Authorizing Actions Using Policies - Actions That Don't Require Models --}}
+    @can('create', \App\Models\Admin\User::class)
     <div class="d-md-block d-none">
       <a href="{{route('users.create')}}" class="btn btn-outline-primary btn-sm bd-2 mg-l-5 btn-uppercase ">
         <i data-feather="plus" class="wd-10 mg-r-5"></i> Nuevo Usuario
       </a>
     </div>
+    @endcan
   </div>
   
   <div class="row row-xs">
