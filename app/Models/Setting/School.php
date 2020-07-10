@@ -25,12 +25,12 @@ class School extends Model
 
     /*Mutators*/
 
-    public function setKey($value)
+    public function setKeyAttribute($value)
     {
         $this->attributes['key'] = mb_strtoupper($value);
     }
 
-    public function setIncorporation($value)
+    public function setIncorporationAttribute($value)
     {
         $this->attributes['incorporation'] = mb_strtoupper($value);
     }

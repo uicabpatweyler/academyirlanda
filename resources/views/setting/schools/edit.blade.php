@@ -26,7 +26,7 @@
     <div class="col-lg-12 col-xl-12 mg-t-0">
       <div class="card card-accent-green-700 shadow-sm">
         <div class="card-body">
-          <form method="POST" id="formEdit" name="formEdit" action="" class="bd bd-1 rounded">
+          <form method="POST" id="formEdit" name="formEdit" action="{{route('schools.update', $school->id)}}" class="bd bd-1 rounded">
             @csrf
             @method('PATCH')
             <div class="pd-x-15 pd-y-15 mb-3 d-flex align-items-center bd-b bd-1">
@@ -286,7 +286,7 @@
         return false;
       }).on('form:success', function(){
         $("#btn_submit").prop('disabled', 'disabled');
-        submitForm("POST","{{ route('schools.store') }}", $("#formEdit").serialize());
+        submitForm("POST","{{ route('schools.update', $school->id) }}", $("#formEdit").serialize());
       });
 
       function submitForm(_method, _url, _data){

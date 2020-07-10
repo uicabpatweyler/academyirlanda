@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Setting;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSchool;
+use App\Http\Requests\UpdateSchool;
 use App\Models\SchoolLevel;
 use App\Models\SchoolService;
 use App\Models\SchoolType;
@@ -57,9 +58,14 @@ class SchoolController extends Controller
             ],200);
     }
 
-    public function update(Request $request, School $school)
+    public function update(UpdateSchool $request, School $school)
     {
-        //
+        $request->updateSchool($school);
+        return response()
+            ->json([
+                'message' => 'Los datos de la escuela se han actualizado correctamente.',
+                'url' => route('schools.index')
+            ]);
     }
 
     public function destroy(School $school)
