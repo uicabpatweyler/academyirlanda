@@ -26,6 +26,16 @@ class CreateSchoolsTable extends Migration
             $table->string('email',60)->nullable();
             $table->string('office_phone',20)->nullable();
             $table->boolean('status')->default(true);
+            $table->string('street',120)->nullable();
+            $table->string('exterior_number',60)->nullable();
+            $table->string('interior_number',60)->nullable();
+            $table->string('references',120)->nullable();
+            $table->string('settlement',120)->nullable(); //colonia o asentamiento
+            $table->string('postal_code',5)->nullable();
+            $table->string('entity',30)->nullable();
+            $table->string('town',60)->nullable();
+            $table->string('location',60)->nullable();
+            $table->string('country',30)->nullable();
             $table->unsignedInteger('user_created');
             $table->unsignedInteger('user_updated');
             $table->softDeletes();

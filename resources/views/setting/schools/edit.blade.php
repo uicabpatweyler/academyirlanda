@@ -159,70 +159,70 @@
                     <input class="form-control @error('street') is-invalid @enderror"
                            id="street" name="street"
                            type="text"
-                           value="">
+                           value="{{$school->street}}">
                   </div>
                   <div class="form-group col-sm-3 d-flex flex-column align-items-start">
                     <label for="exterior_number">Núm. Ext.</label>
                     <input class="form-control @error('exterior_number') is-invalid @enderror"
                            id="exterior_number" name="exterior_number"
                            type="text"
-                           value="">
+                           value="{{$school->exterior_number}}">
                   </div>
                   <div class="form-group col-sm-3 d-flex flex-column align-items-start">
                     <label for="interior_number">Núm. Int.</label>
                     <input class="form-control @error('interior_number') is-invalid @enderror"
                            id="interior_number" name="interior_number"
                            type="text"
-                           value="">
+                           value="{{$school->interior_number}}">
                   </div>
                   <div class="form-group col-sm-5 d-flex flex-column align-items-start">
                     <label for="references">Referencias</label>
                     <input class="form-control @error('references') is-invalid @enderror"
                            id="references" name="references"
                            type="text"
-                           value="">
+                           value="{{$school->references}}">
                   </div>
                   <div class="form-group col-sm-5 d-flex flex-column align-items-start">
                     <label for="settlement">Colonia</label>
                     <input class="form-control @error('settlement') is-invalid @enderror"
                            id="settlement" name="settlement"
                            type="text"
-                           value="">
+                           value="{{$school->settlement}}">
                   </div>
                   <div class="form-group col-sm-2 d-flex flex-column align-items-start">
                     <label for="postal_code">C.P.</label>
                     <input class="form-control @error('postal_code') is-invalid @enderror"
                            id="postal_code" name="postal_code"
                            type="text"
-                           value="">
+                           value="{{$school->postal_code}}">
                   </div>
                   <div class="form-group col-sm-3 d-flex flex-column align-items-start">
                     <label for="entity">Entidad</label>
                     <input class="form-control @error('entity') is-invalid @enderror"
                            id="entity" name="entity"
                            type="text"
-                           value="">
+                           value="{{$school->entity}}">
                   </div>
                   <div class="form-group col-sm-3 d-flex flex-column align-items-start">
                     <label for="town">Municipio</label>
                     <input class="form-control @error('town') is-invalid @enderror"
                            id="town" name="town"
                            type="text"
-                           value="">
+                           value="{{$school->town}}">
                   </div>
                   <div class="form-group col-sm-3 d-flex flex-column align-items-start">
                     <label for="location">Localidad</label>
                     <input class="form-control @error('location') is-invalid @enderror"
                            id="location" name="location"
                            type="text"
-                           value="">
+                           value="{{$school->location}}">
                   </div>
                   <div class="form-group col-sm-3 d-flex flex-column align-items-start">
                     <label for="country">País</label>
                     <input class="form-control @error('country') is-invalid @enderror"
                            id="country" name="country"
                            type="text"
-                           value="">
+                           value="{{$school->country}}">
                   </div>
                 </div>
               </div>

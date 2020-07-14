@@ -78,7 +78,7 @@
 @push('scripts')
 <script>
   $().ready( function () {
-    $("#btn_delete").click(function () {
+    $(".btn-danger").click(function () {
       let _url = $(this).data('url');
       Swal.fire({
         title: '¿Deseas borrar el usuario seleccionado?',

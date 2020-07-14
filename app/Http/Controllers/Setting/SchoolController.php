@@ -68,6 +68,17 @@ class SchoolController extends Controller
             ]);
     }
 
+    public function delete(School $school)
+    {
+        $this->authorize('delete', $school);
+        $school->delete();
+        return response()
+            ->json([
+                'message' => 'La escuela se ha borrado correctamente.',
+                'url' => route('schools.index')
+            ]);
+    }
+
     public function destroy(School $school)
     {
         //

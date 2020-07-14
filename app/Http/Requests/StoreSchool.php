@@ -52,6 +52,27 @@ class StoreSchool extends FormRequest
         ];
     }
 
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'required'=> 'El campo es obligatorio.',
+            'string'  => 'El campo debe ser una cadena de caracteres.',
+            'email'   => 'El e-mail no es un correo válido',
+            'min'       => [
+                'string'  => 'Debe contener al menos :min caracteres.'
+            ],
+            'max' => [
+                'string'  => 'No debe ser mayor que :max caracteres.'
+            ],
+            'unique'    => 'Esta clave ya ha sido registrada.'
+        ];
+    }
+
     public function createSchool()
     {
         $school = School::create([
@@ -66,6 +87,16 @@ class StoreSchool extends FormRequest
             'email' => $this->email,
             'office_phone' => $this->office_phone,
             'status' => true,
+            'street' => null,
+            'exterior_number' => null,
+            'interior_number' => null,
+            'references' => null,
+            'settlement' => null,
+            'postal_code' => null,
+            'entity' => null,
+            'town' => null,
+            'location' => null,
+            'country' => null,
             'user_created' => $this->user()->id,
             'user_updated' => $this->user()->id
         ]);

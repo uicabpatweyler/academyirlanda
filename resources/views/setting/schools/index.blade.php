@@ -66,7 +66,7 @@
                         </a>
                       @endcan
                       @can('delete', $school)
-                        <button type="button" data-url="" class="btn btn-danger btn-xs pd-r-4 pd-l-4" id="btn_delete" name="{{$school->id}}">
+                        <button type="button" data-url="{{ route('schools.delete', $school) }}" class="btn btn-danger btn-xs pd-r-4 pd-l-4" id="btn_delete" name="{{$school->id}}">
                           <i data-feather="trash-2" class=""></i> Borrar
                         </button>
                       @endcan
@@ -83,3 +83,38 @@
     </div>
   </div>
 @endsection
+@push('scripts')
+  <script>
+    $().ready( function () {
+      $(".btn-danger").click(function () {
+        let _url = $(this).data('url');
+        Swal.fire({
+          title: '¿Deseas borrar la escuela seleccionada?',
+          text: "",
+          type: 'question',
+          allowOutsideClick:  false,
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          cancelButtonText : 'No',
+          confirmButtonText: 'Sí'
+        }).then((result) => {
+          if (result.value) {
+            $(this).prop('disabled','disabled');
+            $.ajax({
+              method: 'PATCH',
+              url: _url,
+              data: {
+                "_token": "{{ csrf_token() }}"
+              }
+            }).done(function( data, textStatus, jqXHR ) {
+              showSuccessForm(data.message, data.url);
+            }).fail(function( jqXHR, textStatus, errorThrown ) {
+              showErrorsForm(textStatus);
+            });
+          }
+        });
+      });
+    });
+  </script>
+@endpush

@@ -53,6 +53,27 @@ class UpdateSchool extends FormRequest
         ];
     }
 
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'required'=> 'El campo es obligatorio.',
+            'string'  => 'El campo debe ser una cadena de caracteres.',
+            'email'   => 'El e-mail no es un correo válido',
+            'min'       => [
+                'string'  => 'Debe contener al menos :min caracteres.'
+            ],
+            'max' => [
+                'string'  => 'No debe ser mayor que :max caracteres.'
+            ],
+            'unique'    => 'Esta clave ya ha sido registrada.'
+        ];
+    }
+
     public function updateSchool(School $school)
     {
         $school->fill([
@@ -66,6 +87,16 @@ class UpdateSchool extends FormRequest
             'economic_support' => $this->economic_support,
             'email' => $this->email,
             'office_phone' => $this->office_phone,
+            'street' => $this->street,
+            'exterior_number' => $this->exterior_number,
+            'interior_number' => $this->interior_number,
+            'references' => $this->references,
+            'settlement' => $this->settlement,
+            'postal_code' => $this->postal_code,
+            'entity' => $this->entity,
+            'town' => $this->town,
+            'location' => $this->location,
+            'country' => $this->country,
             'user_updated' => $this->user()->id
         ]);
 
