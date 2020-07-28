@@ -33,6 +33,13 @@ class OptionsTableSeeder extends Seeder
                 'opt_name' => 'Escuelas',
                 'opt_type' => 'option_mod',
                 'opt_resource' => 'schools'
+            ],
+            [
+                'module_id' => 2,
+                'opt_position' => 1,
+                'opt_name' => 'Ciclos Escolares',
+                'opt_type' => 'option_mod',
+                'opt_resource' => 'school_cycles'
             ]
         ];
 

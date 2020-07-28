@@ -63,6 +63,14 @@ class PermissionsTableSeeder extends Seeder
             'guard_name' => 'web'
         ]);
 
+        Permission::create([
+            'belongs_to' => null,
+            'position' => 3,
+            'name' => 'school_cycles',
+            'display_name' => 'Ciclos Escolares',
+            'guard_name' => 'web'
+        ]);
+
         /*---- Permisos para los roles de usuario ----*/
 
         Permission::create([
@@ -194,6 +202,51 @@ class PermissionsTableSeeder extends Seeder
             'belongs_to' => 'schools',
             'position' => 6,
             'name' => 'schools.delete',
+            'display_name' => 'Eliminar',
+            'guard_name' => 'web'
+        ]);
+
+        /*---- Permisos para la administración de los ciclos escolares----*/
+
+        Permission::create([
+            'belongs_to' => 'school_cycles',
+            'position' => 1,
+            'name' => 'school_cycles.viewAny',
+            'display_name' => 'Navegar/Listado',
+            'guard_name' => 'web'
+        ]);
+        Permission::create([
+            'belongs_to' => 'school_cycles',
+            'position' => 2,
+            'name' => 'school_cycles.view',
+            'display_name' => 'Mostrar',
+            'guard_name' => 'web'
+        ]);
+        Permission::create([
+            'belongs_to' => 'school_cycles',
+            'position' => 3,
+            'name' => 'school_cycles.create',
+            'display_name' => 'Crear',
+            'guard_name' => 'web'
+        ]);
+        Permission::create([
+            'belongs_to' => 'school_cycles',
+            'position' => 4,
+            'name' => 'school_cycles.update',
+            'display_name' => 'Editar/Actualizar',
+            'guard_name' => 'web'
+        ]);
+        Permission::create([
+            'belongs_to' => 'school_cycles',
+            'position' => 5,
+            'name' => 'school_cycles.soft_delete',
+            'display_name' => 'Borrar',
+            'guard_name' => 'web'
+        ]);
+        Permission::create([
+            'belongs_to' => 'school_cycles',
+            'position' => 6,
+            'name' => 'school_cycles.delete',
             'display_name' => 'Eliminar',
             'guard_name' => 'web'
         ]);

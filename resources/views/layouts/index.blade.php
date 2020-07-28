@@ -176,6 +176,11 @@
                 <a href="{{route('schools.index')}}">Escuelas</a>
               </li>
               @endif
+              @if(Auth::user()->can('*.*') || Auth::user()->can('school_cycles'))
+                <li class="{{ Str::contains(url()->current(), ['school_cycles']) ? 'active' : '' }}">
+                  <a href="{{route('school_cycles.index')}}">Ciclos Escolares</a>
+                </li>
+              @endif
             </ul>
           </li>
         @endif
