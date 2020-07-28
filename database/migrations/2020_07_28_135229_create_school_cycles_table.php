@@ -15,7 +15,7 @@ class CreateSchoolCyclesTable extends Migration
     {
         Schema::create('school_cycles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('period',9);
+            $table->string('period',9)->unique();
             $table->boolean('status')->default(true);
             $table->unsignedInteger('user_created');
             $table->unsignedInteger('user_updated');
