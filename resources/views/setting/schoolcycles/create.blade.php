@@ -16,12 +16,12 @@
       <h4 class="mg-b-0 tx-spacing--1">Nueva Escuela</h4>
     </div>
     <div class="d-md-block d-none">
-      <a href="{{route('schools.index')}}" class="btn btn-outline-secondary btn-sm bd-2 mg-l-5 btn-uppercase ">
+      <a href="{{route('school_cycles.index')}}" class="btn btn-outline-secondary btn-sm bd-2 mg-l-5 btn-uppercase ">
         <i data-feather="arrow-left" class="wd-10 mg-r-5"></i> Regresar
       </a>
     </div>
   </div>
-  
+
   <div class="row row-xs">
     <div class="col-lg-12 col-xl-12 mg-t-0">
       <div class="card card-accent-green-700 shadow-sm">
@@ -63,7 +63,7 @@
   </div>
 @endsection
 @push('scripts')
-  
+
 @include('shared.parsley')
 
 <script>
