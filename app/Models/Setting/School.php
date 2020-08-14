@@ -35,12 +35,25 @@ class School extends Model
         $this->attributes['incorporation'] = mb_strtoupper($value);
     }
 
+    public function getNameAttribute($value)
+    {
+      return ucwords($value);
+    }
+
     /*
      * Get the level that owns the school
      */
     public function level()
     {
         return $this->belongsTo(SchoolLevel::class,'school_level_id', 'id');
+    }
+
+    /*
+     * Get the school grades for the school
+     */
+    public function schoolGrades()
+    {
+      return $this->hasMany(SchoolGrade::class);
     }
 
 }

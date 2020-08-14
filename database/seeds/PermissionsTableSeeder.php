@@ -71,6 +71,14 @@ class PermissionsTableSeeder extends Seeder
             'guard_name' => 'web'
         ]);
 
+        Permission::create([
+          'belongs_to' => null,
+          'position' => 4,
+          'name' => 'school_grades',
+          'display_name' => 'Grados Escolares',
+          'guard_name' => 'web'
+        ]);
+
         /*---- Permisos para los roles de usuario ----*/
 
         Permission::create([
@@ -250,5 +258,51 @@ class PermissionsTableSeeder extends Seeder
             'display_name' => 'Eliminar',
             'guard_name' => 'web'
         ]);
+
+        /*---- Permisos para la administración de los grados escolares----*/
+
+        Permission::create([
+          'belongs_to' => 'school_grades',
+          'position' => 1,
+          'name' => 'school_grades.viewAny',
+          'display_name' => 'Navegar/Listado',
+          'guard_name' => 'web'
+        ]);
+        Permission::create([
+          'belongs_to' => 'school_grades',
+          'position' => 2,
+          'name' => 'school_grades.view',
+          'display_name' => 'Mostrar',
+          'guard_name' => 'web'
+        ]);
+        Permission::create([
+          'belongs_to' => 'school_grades',
+          'position' => 3,
+          'name' => 'school_grades.create',
+          'display_name' => 'Crear',
+          'guard_name' => 'web'
+        ]);
+        Permission::create([
+          'belongs_to' => 'school_grades',
+          'position' => 4,
+          'name' => 'school_grades.update',
+          'display_name' => 'Editar/Actualizar',
+          'guard_name' => 'web'
+        ]);
+        Permission::create([
+          'belongs_to' => 'school_grades',
+          'position' => 5,
+          'name' => 'school_grades.soft_delete',
+          'display_name' => 'Borrar',
+          'guard_name' => 'web'
+        ]);
+        Permission::create([
+          'belongs_to' => 'school_grades',
+          'position' => 6,
+          'name' => 'school_grades.delete',
+          'display_name' => 'Eliminar',
+          'guard_name' => 'web'
+        ]);
+
     }
 }

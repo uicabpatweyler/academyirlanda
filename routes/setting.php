@@ -7,6 +7,7 @@ Route::catch(function () {
 
 Route::resource('schools', 'SchoolController');
 Route::resource('school_cycles','SchoolCycleController');
+Route::resource('school_grades','SchoolGradeController');
 Route::patch('/schools/delete/{school}', 'SchoolController@delete')
     ->name('schools.delete');
 Route::patch('/school_cycles/delete/{school_cycle}', 'SchoolCycleController@delete')

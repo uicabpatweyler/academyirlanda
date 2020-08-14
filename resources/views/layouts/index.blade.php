@@ -4,15 +4,15 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  
+
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
-  
+
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  
+
   <title>{{ $title }} | MP&A</title>
-  
+
   <!--================================-->
   <!-- CSS-->
   <!--================================-->
@@ -55,7 +55,7 @@
       border-top-width: 2px!important;
     }
   </style>
-  
+
 </head>
 <body>
   <!--====================================-->
@@ -69,18 +69,18 @@
         <i data-feather="menu"></i>
         <i data-feather="x"></i>
       </a>
-      
+
     </div>
     <!-- end aside-header -->
-    
+
     <!--================================-->
     <!-- Sidebar Body Start -->
     <!--================================-->
     <div class="aside-body">
-      
+
       <!-- begin aside-loggedin -->
       <div class="aside-loggedin">
-    
+
         <div class="d-flex align-items-center justify-content-start">
           <!-- avatar user loggedin -->
           <a href="" class="avatar">
@@ -98,7 +98,7 @@
             </form>
           </div>
         </div>
-    
+
         <!-- begin aside-loggedin-user -->
         <div class="aside-loggedin-user">
           <!-- name user loggedin -->
@@ -109,7 +109,7 @@
           <!-- role user loggedin -->
           <p class="tx-color-03 tx-12 mg-b-0">{{ Auth::user()->email }}</p>
         </div> <!-- end aside-loggedin-user -->
-  
+
         <!-- begin menu collapse loggedin -->
         <div class="collapse" id="loggedinMenu">
           <ul class="nav nav-aside mg-b-0">
@@ -127,9 +127,9 @@
             </li>
           </ul>
         </div><!-- end menu collapse loggedin -->
-  
+
       </div><!-- end aside-loggedin -->
-  
+
       <!--================================-->
       <!-- Sidebar Menu Start -->
       <!--================================-->
@@ -181,12 +181,17 @@
                   <a href="{{route('school_cycles.index')}}">Ciclos Escolares</a>
                 </li>
               @endif
+                @if(Auth::user()->can('*.*') || Auth::user()->can('school_grades'))
+                  <li class="{{ Str::contains(url()->current(), ['school_grades']) ? 'active' : '' }}">
+                    <a href="{{route('school_grades.index')}}">Grados Escolares</a>
+                  </li>
+                @endif
             </ul>
           </li>
         @endif
-        
+
       </ul><!-- End Sidebar Menu End -->
-      
+
     </div><!-- end aside-body -->
   </aside><!-- End Sidebar. Navigation Vertical -->
 
@@ -198,7 +203,7 @@
     <div class="content-header">
       <h4 class="tx-inverse mg-t-15">Academia de Inglés: Irlanda</h4>
     </div><!-- End content-header -->
-  
+
     <!--================================-->
     <!-- Start Page Content Body -->
     <!--================================-->
@@ -207,7 +212,7 @@
       <div class="container pd-x-0">
         @yield('content')
       </div><!-- End Container Body -->
-  
+
     </div> <!-- End Page Content Body -->
   </div> <!-- /content ht-100v pd-0 -->
 

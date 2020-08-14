@@ -40,6 +40,13 @@ class OptionsTableSeeder extends Seeder
                 'opt_name' => 'Ciclos Escolares',
                 'opt_type' => 'option_mod',
                 'opt_resource' => 'school_cycles'
+            ],
+            [
+              'module_id' => 2,
+              'opt_position' => 2,
+              'opt_name' => 'Grados Escolares',
+              'opt_type' => 'option_mod',
+              'opt_resource' => 'school_grades'
             ]
         ];
 
