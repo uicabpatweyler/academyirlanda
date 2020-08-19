@@ -53,7 +53,7 @@ class SchoolGradePolicy
      */
     public function update(User $user, SchoolGrade $schoolGrade)
     {
-        //
+      return $user->hasPermissionTo('school_grades.update') || $user->hasPermissionTo('*.*');
     }
 
     /**
@@ -65,7 +65,7 @@ class SchoolGradePolicy
      */
     public function delete(User $user, SchoolGrade $schoolGrade)
     {
-        //
+      return $user->hasPermissionTo('school_grades.soft_delete') || $user->hasPermissionTo('*.*');
     }
 
     /**

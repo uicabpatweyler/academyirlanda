@@ -72,36 +72,36 @@
 @endsection
 @push('scripts')
 <script>
-  $().ready( function () {
-    $(".btn-danger").click(function () {
-      let _url = $(this).data('url');
-      Swal.fire({
-        title: '¿Deseas borrar el ciclo escolar seleccionado?',
-        text: "",
-        type: 'question',
-        allowOutsideClick:  false,
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        cancelButtonText : 'No',
-        confirmButtonText: 'Sí'
-      }).then((result) => {
-        if (result.value) {
-          $(this).prop('disabled','disabled');
-          $.ajax({
-            method: 'PATCH',
-            url: _url,
-            data: {
-              "_token": "{{ csrf_token() }}"
-            }
-          }).done(function( data, textStatus, jqXHR ) {
-            showSuccessForm(data.message, data.url);
-          }).fail(function( jqXHR, textStatus, errorThrown ) {
-            showErrorsForm(textStatus);
-          });
-        }
-      });
+$().ready( function () {
+  $(".btn-danger").click(function () {
+    let _url = $(this).data('url');
+    Swal.fire({
+      title: '¿Deseas borrar el ciclo escolar seleccionado?',
+      text: "",
+      type: 'question',
+      allowOutsideClick:  false,
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText : 'No',
+      confirmButtonText: 'Sí'
+    }).then((result) => {
+      if (result.value) {
+        $(this).prop('disabled','disabled');
+        $.ajax({
+          method: 'PATCH',
+          url: _url,
+          data: {
+            "_token": "{{ csrf_token() }}"
+          }
+        }).done(function( data, textStatus, jqXHR ) {
+          showSuccessForm(data.message, data.url);
+        }).fail(function( jqXHR, textStatus, errorThrown ) {
+          showErrorsForm(textStatus);
+        });
+      }
     });
   });
+});
 </script>
 @endpush

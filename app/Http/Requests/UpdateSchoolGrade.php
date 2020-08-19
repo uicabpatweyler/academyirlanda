@@ -6,7 +6,7 @@ use App\Models\Setting\SchoolGrade;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreSchoolGrade extends FormRequest
+class UpdateSchoolGrade extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +15,7 @@ class StoreSchoolGrade extends FormRequest
      */
     public function authorize()
     {
-      return $this->user()->hasPermissionTo('school_grades.create') || $this->user()->hasPermissionTo('*.*');
+      return $this->user()->hasPermissionTo('school_grades.update') || $this->user()->hasPermissionTo('*.*');
     }
 
     /**
@@ -25,23 +25,22 @@ class StoreSchoolGrade extends FormRequest
      */
     public function rules()
     {
-        return [
-            'school_id' => ['bail', 'present', 'required'],
-            'name' => [
-              'bail',
-              'present',
-              'required',
-              'string',
-              'min:3',
-              'max:120',
-              Rule::unique('school_grades')->where(function ($query) {
-                return $query->where('school_id', $this->school_id)
-                  ->where('name', $this->name)
-                  ->where('abreviation', $this->abreviation);
-              })
-            ],
-          'abreviation' => ['bail', 'present', 'required', 'string', 'min:1', 'max:60']
-        ];
+      return [
+        'school_id' => ['bail', 'present', 'required'],
+        'name' => [
+          'bail',
+          'present',
+          'required',
+          'string',
+          'min:3',
+          'max:120',
+          Rule::unique('school_grades')->where(function ($query) {
+            return $query->where('school_id', $this->school_id)
+              ->where('name', $this->name);
+          })->ignore($this->school_grade->id)
+        ],
+        'abreviation' => ['bail', 'present', 'required', 'string', 'min:1', 'max:60']
+      ];
     }
 
     /**
@@ -64,14 +63,12 @@ class StoreSchoolGrade extends FormRequest
       ];
     }
 
-    public function createSchoolGrade()
+    public function updateSchoolGrade(SchoolGrade $schoolGrade)
     {
-      $schoolGrade = SchoolGrade::create([
+      $schoolGrade->fill([
         'school_id' => $this->school_id,
         'name' => $this->name,
         'abreviation' => $this->abreviation,
-        'status' => true,
-        'user_created' => $this->user()->id,
         'user_updated' => $this->user()->id
       ]);
 
