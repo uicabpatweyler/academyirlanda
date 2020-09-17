@@ -5,9 +5,11 @@ namespace App\Providers;
 use App\Models\Admin\Role;
 use App\Models\Admin\User;
 use App\Models\Setting\SchoolCycle;
+use App\Models\Setting\SchoolFee;
 use App\Models\Setting\SchoolGrade;
 use App\Policies\RolePolicy;
 use App\Policies\SchoolCyclePolicy;
+use App\Policies\SchoolFeePolicy;
 use App\Policies\SchoolGradePolicy;
 use App\Policies\SchoolPolicy;
 use App\Policies\UserPolicy;
@@ -28,7 +30,8 @@ class AuthServiceProvider extends ServiceProvider
         User::class => UserPolicy::class,
         School::class => SchoolPolicy::class,
         SchoolCycle::class => SchoolCyclePolicy::class,
-        SchoolGrade::class => SchoolGradePolicy::class
+        SchoolGrade::class => SchoolGradePolicy::class,
+        SchoolFee::class => SchoolFeePolicy::class
     ];
 
     /**
