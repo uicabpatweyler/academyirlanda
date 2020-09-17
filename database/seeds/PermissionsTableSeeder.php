@@ -79,6 +79,14 @@ class PermissionsTableSeeder extends Seeder
           'guard_name' => 'web'
         ]);
 
+        Permission::create([
+          'belongs_to' => null,
+          'position' => 5,
+          'name' => 'school_fees',
+          'display_name' => 'Cuotas Escolares',
+          'guard_name' => 'web'
+        ]);
+
         /*---- Permisos para los roles de usuario ----*/
 
         Permission::create([
@@ -300,6 +308,51 @@ class PermissionsTableSeeder extends Seeder
           'belongs_to' => 'school_grades',
           'position' => 6,
           'name' => 'school_grades.delete',
+          'display_name' => 'Eliminar',
+          'guard_name' => 'web'
+        ]);
+
+        /*---- Permisos para la administración de las cutoas escolares----*/
+
+        Permission::create([
+          'belongs_to' => 'school_fees',
+          'position' => 1,
+          'name' => 'school_fees.viewAny',
+          'display_name' => 'Navegar/Listado',
+          'guard_name' => 'web'
+        ]);
+        Permission::create([
+          'belongs_to' => 'school_fees',
+          'position' => 2,
+          'name' => 'school_fees.view',
+          'display_name' => 'Mostrar',
+          'guard_name' => 'web'
+        ]);
+        Permission::create([
+          'belongs_to' => 'school_fees',
+          'position' => 3,
+          'name' => 'school_fees.create',
+          'display_name' => 'Crear',
+          'guard_name' => 'web'
+        ]);
+        Permission::create([
+          'belongs_to' => 'school_fees',
+          'position' => 4,
+          'name' => 'school_fees.update',
+          'display_name' => 'Editar/Actualizar',
+          'guard_name' => 'web'
+        ]);
+        Permission::create([
+          'belongs_to' => 'school_fees',
+          'position' => 5,
+          'name' => 'school_fees.soft_delete',
+          'display_name' => 'Borrar',
+          'guard_name' => 'web'
+        ]);
+        Permission::create([
+          'belongs_to' => 'school_fees',
+          'position' => 6,
+          'name' => 'school_fees.delete',
           'display_name' => 'Eliminar',
           'guard_name' => 'web'
         ]);
