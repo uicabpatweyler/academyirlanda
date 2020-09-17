@@ -181,11 +181,16 @@
                   <a href="{{route('school_cycles.index')}}">Ciclos Escolares</a>
                 </li>
               @endif
-                @if(Auth::user()->can('*.*') || Auth::user()->can('school_grades'))
-                  <li class="{{ Str::contains(url()->current(), ['school_grades']) ? 'active' : '' }}">
-                    <a href="{{route('school_grades.index')}}">Grados Escolares</a>
-                  </li>
-                @endif
+              @if(Auth::user()->can('*.*') || Auth::user()->can('school_grades'))
+                <li class="{{ Str::contains(url()->current(), ['school_grades']) ? 'active' : '' }}">
+                  <a href="{{route('school_grades.index')}}">Grados Escolares</a>
+                </li>
+              @endif
+              @if(Auth::user()->can('*.*') || Auth::user()->can('school_fees'))
+                <li class="{{ Str::contains(url()->current(), ['school_fees']) ? 'active' : '' }}">
+                  <a href="{{route('school_fees.index')}}">Cuotas Escolares</a>
+                </li>
+              @endif
             </ul>
           </li>
         @endif
