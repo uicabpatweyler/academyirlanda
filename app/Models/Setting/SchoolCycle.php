@@ -19,6 +19,16 @@ class SchoolCycle extends Model
      */
     public function scopeStatus($query, bool $status)
     {
-        return $query->where('status', $status);
+        return $query->where('status', $status)->orderBy('created_at', 'desc');
     }
+
+  /**
+   * Get the school fees  for the school cycle.
+   */
+  public function schoolFees()
+  {
+    return $this->hasMany(SchoolFee::class);
+  }
+
+
 }
