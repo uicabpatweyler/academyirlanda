@@ -1,5 +1,5 @@
 @extends('layouts.index', [
-    'title' => 'Configuración: Cuotas Escolares'
+    'title' => 'Configuración: Grupos Escolares'
 ])
 
 @section('content')
@@ -9,14 +9,14 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb breadcrumb-style1 mg-b-10">
           <li class="breadcrumb-item">Configuración</li>
-          <li class="breadcrumb-item">Cuotas Escolares</li>
-          <li class="breadcrumb-item active">Nueva Cuota Escolar</li>
+          <li class="breadcrumb-item">Grupos Escolares</li>
+          <li class="breadcrumb-item active">Nuevo Grupo Escolar</li>
         </ol>
       </nav>
-      <h4 class="mg-b-0 tx-spacing--1">Nueva Cuota Escolar</h4>
+      <h4 class="mg-b-0 tx-spacing--1">Nuevo Grupo Escolar</h4>
     </div>
     <div class="d-md-block d-none">
-      <a href="{{route('school_fees.index')}}" class="btn btn-outline-secondary btn-sm bd-2 mg-l-5 btn-uppercase ">
+      <a href="{{route('school_groups.index')}}" class="btn btn-outline-secondary btn-sm bd-2 mg-l-5 btn-uppercase ">
         <i data-feather="arrow-left" class="wd-10 mg-r-5"></i> Regresar
       </a>
     </div>
@@ -26,7 +26,7 @@
     <div class="col-lg-12 col-xl-12 mg-t-0">
       <div class="card card-accent-green-700 shadow-sm">
         <div class="card-body">
-          <form method="POST" id="formCreate" name="formCreate" action="{{route('school_fees.store')}}" class="bd bd-1 rounded">
+          <form method="POST" id="formCreate" name="formCreate" action="{{route('school_groups.create')}}" class="bd bd-1 rounded">
             @csrf
             <div class="pd-x-15 pd-y-15 mb-3 d-flex align-items-center bd-b bd-1">
               <span class="tx-13 tx-semibold text-secondary tx-interui tx-spacing-1">
@@ -37,7 +37,9 @@
             <div class="row row-sm pd-x-20 pd-b-5">
               <div class="form-group col-sm-4">
                 <label for="school_id">Escuela <small><span class="tx-danger tx-bold">*</span></small></label>
-                <select name="school_id" id="school_id" class="custom-select @error('school_id') is-invalid @enderror" required>
+                <select name="school_id" id="school_id"
+                        class="custom-select @error('school_id') is-invalid @enderror"
+                        required>
                   @foreach($schools as $school)
                     @if($loop->first)
                       <option selected value="">[Elija una escuela]</option>
@@ -48,7 +50,9 @@
               </div>
               <div class="form-group col-sm-4 d-flex flex-column align-items-start">
                 <label for="school_cycle_id">Ciclo Escolar <small><span class="tx-danger tx-bold">*</span></small></label>
-                <select name="school_cycle_id" id="school_cycle_id" class="custom-select @error('school_cycle_id') is-invalid @enderror" required>
+                <select name="school_cycle_id" id="school_cycle_id"
+                        class="custom-select @error('school_cycle_id') is-invalid @enderror"
+                        required>
                   @foreach($cycles as $cycle)
                     @if($loop->first)
                       <option selected value="">[Elija un ciclo escolar]</option>
@@ -58,33 +62,44 @@
                 </select>
               </div>
               <div class="form-group col-sm-4 d-flex flex-column align-items-start">
-                <label for="type">Tipo <small><span class="tx-danger tx-bold">*</span></small></label>
-                <select name="type" id="type" class="custom-select @error('type') is-invalid @enderror" required>
-                  @foreach($types as $type)
-                    @if($loop->first)
-                      <option selected value="">[Elija el tipo de cuota]</option>
-                    @endif
-                    <option value="{{$type['id']}}">{{$type['name']}}</option>
-                  @endforeach
+                <label for="school_grade_id">Grado Escolar <small><span class="tx-danger tx-bold">*</span></small></label>
+                <select name="school_grade_id" id="school_grade_id"
+                        class="custom-select @error('school_grade_id') is-invalid @enderror"
+                        required disabled>
+                  <option selected value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="row row-sm pd-x-20 pd-b-5">
+              <div class="form-group col-sm-5">
+                <label for="fee_one">Cuota de Inscripción <small><span class="tx-danger tx-bold">*</span></small></label>
+                <select name="fee_one" id="fee_one"
+                        class="custom-select @error('fee_one') is-invalid @enderror"
+                        required disabled>
+                  <option selected value=""></option>
+                </select>
+              </div>
+              <div class="form-group col-sm-5 d-flex flex-column align-items-start">
+                <label for="fee_two">Cuota de Colegiatura <small><span class="tx-danger tx-bold">*</span></small></label>
+                <select name="fee_two" id="fee_two"
+                        class="custom-select @error('fee_two') is-invalid @enderror"
+                        required disabled>
+                  <option selected value=""></option>
                 </select>
               </div>
             </div>
             <div class="row row-sm pd-x-20 pd-b-5">
               <div class="form-group col-sm-4">
-                <label for="name">Nombre <small><span class="tx-danger tx-bold">*</span></small></label>
+                <label for="name">Nombre del Grupo <small><span class="tx-danger tx-bold">*</span></small></label>
                 <input type="text"  class="form-control @error('name') is-invalid @enderror"
-                       data-parsley-trigger="change"
-                       id="name" name="name" autocomplete="name" required>
+                       data-parsley-trigger="change" style="text-transform: uppercase;"
+                       id="name" name="name" autocomplete="name" minlength="3" required>
               </div>
               <div class="form-group col-sm-4 d-flex flex-column align-items-start">
-                <label for="amount">Cuota <small><span class="tx-danger tx-bold">*</span></small></label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">$</span>
-                  </div>
-                  <input type="text" class="form-control @error('amount') is-invalid @enderror"
-                         data-parsley-valid-amount data-parsley-trigger="change" id="amount" name="amount" required>
-                </div>
+                <label for="allowed_students">Alumnos Permitidos <small><span class="tx-danger tx-bold">*</span></small></label>
+                <input type="text"  class="form-control @error('allowed_students') is-invalid @enderror"
+                       data-parsley-trigger="change" data-parsley-valid-allowed
+                       id="allowed_students" name="allowed_students" autocomplete="allowed_students" required>
               </div>
             </div>
             <div class="bd-t bd-1 py-2 pd-x-20 mt-4 d-flex justify-content-end">
@@ -110,20 +125,21 @@
 
 <script>
 $().ready( function () {
-
-  let schoolCycle  = null;
-  let typeSelected = null ;
+  let school = null;
+  let cycle = null;
+  let urlRoot = "{{Request::root()}}";
 
   $("#btn_cancel").click(function () {
-    showWarningCancel("{{route('school_fees.index')}}");
+    showWarningCancel("{{route('school_groups.index')}}");
   });
 
-  window.Parsley.addValidator('validAmount',{
+  window.Parsley.addValidator('validAllowed',{
     validateString: function(value){
-      return /^[0-9]+(\.[0-9][0-9])?$/.test(value);
+      //return /^[1-9]\d{2}$/.test(value);
+      return /^[1-9]\d$/.test(value);
     },
     messages : {
-      es: 'La cuota de pago es incorrecta'
+      es: 'El número de alumnos es incorrecto.'
     }
   });
 
@@ -149,7 +165,7 @@ $().ready( function () {
     return false;
   }).on('form:success', function(){
     $("#btn_submit").prop('disabled', 'disabled');
-    submitForm("POST","{{ route('school_fees.store') }}", $("#formCreate").serialize());
+    submitForm("POST","{{ route('school_groups.store') }}", $("#formCreate").serialize());
   });
 
   function submitForm(_method, _url, _data){
@@ -172,27 +188,64 @@ $().ready( function () {
     });
   }
 
-  $("#type").change( function() {
-    typeSelected = $(this).children("option:selected").val()!=="" ? $(this).children("option:selected").text() : null;
-    buildName();
-  });
+  $("#school_id").change( function() {
+    school = $(this).val()!=="" ? $(this).val() : null;
+    if($(this).val()!=='')
+    {
+      $("#school_grade_id").enableControl(true, true);
+      $.getJSON(urlRoot+'/setting/grades_by_school/'+school, null, function (values) {
+        $('#school_grade_id').populateSelect(values);
+      });
+    }
+    else{
+      $("#school_grade_id").enableControl(true, false);
+    }
+    activateSelectsOfFees();
+  } );
 
   $("#school_cycle_id").change( function() {
-    schoolCycle = $(this).children("option:selected").val()!=="" ? $(this).children("option:selected").text() : null;
-    buildName();
-  });
+    cycle = $(this).val()!=="" ? $(this).val() : null;
+    activateSelectsOfFees();
+  } );
 
-  function buildName(){
-    if(schoolCycle!=null && typeSelected!=null)
+  function activateSelectsOfFees()
+  {
+    if(school!==null && cycle!==null)
     {
-      $("#name").val(typeSelected +' '+schoolCycle);
-    }
-    else
-    {
-      $("#name").val("");
-    }
+      $("#fee_one").enableControl(true, true);
+      $("#fee_two").enableControl(true, true);
 
+      $.getJSON(urlRoot+'/setting/filter_school_fees/'+school+'/'+cycle+'/1', null, function (values) {
+        $('#fee_one').populateSelect(values);
+      });
+      $.getJSON(urlRoot+'/setting/filter_school_fees/'+school+'/'+cycle+'/2', null, function (values) {
+        $('#fee_two').populateSelect(values);
+      });
+    }
+    else {
+      $("#fee_one").enableControl(true, false);
+      $("#fee_two").enableControl(true, false);
+    }
   }
+
+  $.fn.enableControl = function(empty, state){
+    if(empty){ $(this).empty(); }
+    if(state){
+      $(this).removeAttr('disabled');
+    }
+    else{
+      $(this).prop('disabled','disabled');
+    }
+  };
+
+  $.fn.populateSelect = function (values) {
+    var options = '';
+    $.each(values, function (key, row) {
+      options += '<option value="' + row.value + '">' + row.text + '</option>';
+    });
+    $(this).html(options);
+  };
+
 });
 </script>
 @endpush

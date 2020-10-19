@@ -87,6 +87,14 @@ class PermissionsTableSeeder extends Seeder
           'guard_name' => 'web'
         ]);
 
+      Permission::create([
+        'belongs_to' => null,
+        'position' => 6,
+        'name' => 'school_groups',
+        'display_name' => 'Grupos Escolares',
+        'guard_name' => 'web'
+      ]);
+
         /*---- Permisos para los roles de usuario ----*/
 
         Permission::create([
@@ -353,6 +361,51 @@ class PermissionsTableSeeder extends Seeder
           'belongs_to' => 'school_fees',
           'position' => 6,
           'name' => 'school_fees.delete',
+          'display_name' => 'Eliminar',
+          'guard_name' => 'web'
+        ]);
+
+        /*---- Permisos para la administración de los grupos escolares----*/
+
+        Permission::create([
+          'belongs_to' => 'school_groups',
+          'position' => 1,
+          'name' => 'school_groups.viewAny',
+          'display_name' => 'Navegar/Listado',
+          'guard_name' => 'web'
+        ]);
+        Permission::create([
+          'belongs_to' => 'school_groups',
+          'position' => 2,
+          'name' => 'school_groups.view',
+          'display_name' => 'Mostrar',
+          'guard_name' => 'web'
+        ]);
+        Permission::create([
+          'belongs_to' => 'school_groups',
+          'position' => 3,
+          'name' => 'school_groups.create',
+          'display_name' => 'Crear',
+          'guard_name' => 'web'
+        ]);
+        Permission::create([
+          'belongs_to' => 'school_groups',
+          'position' => 4,
+          'name' => 'school_groups.update',
+          'display_name' => 'Editar/Actualizar',
+          'guard_name' => 'web'
+        ]);
+        Permission::create([
+          'belongs_to' => 'school_groups',
+          'position' => 5,
+          'name' => 'school_groups.soft_delete',
+          'display_name' => 'Borrar',
+          'guard_name' => 'web'
+        ]);
+        Permission::create([
+          'belongs_to' => 'school_groups',
+          'position' => 6,
+          'name' => 'school_groups.delete',
           'display_name' => 'Eliminar',
           'guard_name' => 'web'
         ]);

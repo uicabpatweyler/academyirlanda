@@ -14,6 +14,12 @@ class SchoolGrade extends Model
   protected $dates    = ['deleted_at', 'created_at', 'updated_at'];
   protected $casts    = ['status' => 'boolean'];
 
+  /* Local scope, filter by status*/
+  public function scopeStatus($query, bool $status)
+  {
+    return $query->where('status', $status);
+  }
+
   public function setNameAttribute($value)
   {
     $this->attributes['name'] = mb_convert_case($value, MB_CASE_TITLE, "UTF-8");
@@ -30,5 +36,13 @@ class SchoolGrade extends Model
   public function school()
   {
     return $this->belongsTo(School::class,'school_id','id');
+  }
+
+  /*
+   * Get the school groups for the school grade
+   */
+  public function schoolGroups()
+  {
+    return $this->hasMany(SchoolGroup::class);
   }
 }

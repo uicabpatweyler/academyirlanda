@@ -7,10 +7,12 @@ use App\Models\Admin\User;
 use App\Models\Setting\SchoolCycle;
 use App\Models\Setting\SchoolFee;
 use App\Models\Setting\SchoolGrade;
+use App\Models\Setting\SchoolGroup;
 use App\Policies\RolePolicy;
 use App\Policies\SchoolCyclePolicy;
 use App\Policies\SchoolFeePolicy;
 use App\Policies\SchoolGradePolicy;
+use App\Policies\SchoolGroupPolicy;
 use App\Policies\SchoolPolicy;
 use App\Policies\UserPolicy;
 use App\Models\Setting\School;
@@ -31,7 +33,8 @@ class AuthServiceProvider extends ServiceProvider
         School::class => SchoolPolicy::class,
         SchoolCycle::class => SchoolCyclePolicy::class,
         SchoolGrade::class => SchoolGradePolicy::class,
-        SchoolFee::class => SchoolFeePolicy::class
+        SchoolFee::class => SchoolFeePolicy::class,
+        SchoolGroup::class => SchoolGroupPolicy::class
     ];
 
     /**

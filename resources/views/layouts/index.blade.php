@@ -191,6 +191,11 @@
                   <a href="{{route('school_fees.index')}}">Cuotas Escolares</a>
                 </li>
               @endif
+              @if(Auth::user()->can('*.*') || Auth::user()->can('school_groups'))
+                <li class="{{ Str::contains(url()->current(), ['school_groups']) ? 'active' : '' }}">
+                  <a href="{{route('school_groups.index')}}">Grupos Escolares</a>
+                </li>
+              @endif
             </ul>
           </li>
         @endif

@@ -68,4 +68,13 @@ class SchoolFee extends Model
     {
       return $this->belongsTo(School::class, 'school_id', 'id');
     }
+
+    /*
+     * Relationship
+     * Get the school groups for the school fee
+     */
+  public function schoolGroup()
+  {
+    return $this->hasMany(SchoolGroup::class);
+  }
 }

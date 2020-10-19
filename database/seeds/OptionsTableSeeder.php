@@ -54,6 +54,13 @@ class OptionsTableSeeder extends Seeder
               'opt_name' => 'Cuotas Escolares',
               'opt_type' => 'option_mod',
               'opt_resource' => 'school_fees'
+            ],
+            [
+              'module_id' => 2,
+              'opt_position' => 4,
+              'opt_name' => 'Grupos Escolares',
+              'opt_type' => 'option_mod',
+              'opt_resource' => 'school_groups'
             ]
         ];
 

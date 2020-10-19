@@ -120,4 +120,17 @@ class SchoolGradeController extends Controller
     {
         //
     }
+
+    public function getGradesBySchool($schoolId)
+    {
+      $schoolGrades = SchoolGrade::query()
+        ->where('school_id', '=', $schoolId)
+        ->select(['id as value','name as text'])
+        ->get()
+        ->toArray();
+
+      array_unshift($schoolGrades, ['value' => '', 'text' => '[Elija un grado]']);
+
+      return $schoolGrades;
+    }
 }

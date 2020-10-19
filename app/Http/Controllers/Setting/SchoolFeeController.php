@@ -9,6 +9,7 @@ use App\Models\Setting\School;
 use App\Models\Setting\SchoolCycle;
 use App\Models\Setting\SchoolFee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SchoolFeeController extends Controller
 {
@@ -120,5 +121,25 @@ class SchoolFeeController extends Controller
     public function destroy(SchoolFee $schoolFee)
     {
         //
+    }
+
+    /*
+     * Route declared in routes/setting.php
+     * https://www.mysqltutorial.org/mysql-format-function/
+     * filter_school_fees/{school}/{cycle}/{type}
+     */
+    public function filterSchoolFees($schoolId, $schoolCycleId, $type)
+    {
+      $schoolFees = SchoolFee::query()
+        ->where('school_id','=',$schoolId)
+        ->where('school_cycle_id','=',$schoolCycleId)
+        ->where('type','=',$type)
+        ->select('id as value', DB::raw("CONCAT(name, ' ( $ ',FORMAT(amount,2),' )') as text"))
+        ->get()
+        ->toArray();
+
+      array_unshift($schoolFees,['value' => '', 'text' => '[Elija una cuota]']);
+
+      return $schoolFees;
     }
 }

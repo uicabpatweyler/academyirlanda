@@ -21,7 +21,7 @@
       </a>
     </div>
   </div>
-  
+
   <div class="row row-xs">
     <div class="col-lg-12 col-xl-12 mg-t-0">
       <div class="card card-accent-green-700 shadow-sm">
@@ -145,7 +145,7 @@
   </div>
 @endsection
 @push('scripts')
-  
+
 @include('shared.parsley')
 
 <script>
@@ -154,7 +154,7 @@
     $("#btn_cancel").click(function () {
       showWarningCancel("{{route('schools.index')}}");
     });
-    
+
     window.Parsley.addValidator('validKeySchool',{
       validateString: function(value){
         return /^[0-9]{2,}[A-Za-z]{3,}[0-9]{4,}[A-Za-z]{1,}$/.test(value);
@@ -211,36 +211,36 @@
 
     $("#school_type_id").change( function (){
       if($(this).val()!==''){
-        
+
         $("#school_level_id").enableControl(true,true);
         $("#school_service_id").enableControl(true,false);
-        
+
         $.getJSON('{{Request::root()}}'+'/setting/school_level/'+$(this).val(), null, function (values) {
           $('#school_level_id').populateSelect(values);
         });
-        
+
       }
       else{
         $("#school_level_id").enableControl(true,false);
         $("#school_service_id").enableControl(true,false);
       }
     });
-    
+
     $("#school_level_id").change( function () {
       if($(this).val()!==''){
 
         $("#school_service_id").enableControl(true,true);
 
         $.getJSON('{{Request::root()}}'+'/setting/school_service/'+$(this).val(), null, function (values) {
-            $('#school_service_id').populateSelect(values);
+          $('#school_service_id').populateSelect(values);
         });
-        
+
       }
       else{
         $("#school_service_id").enableControl(true,false);
       }
     })
-    
+
     $.fn.enableControl = function(empty, state){
       if(empty){ $(this).empty(); }
       if(state){
@@ -258,7 +258,7 @@
       });
       $(this).html(options);
     };
-    
+
   });
 </script>
 @endpush
